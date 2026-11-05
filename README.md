@@ -28,3 +28,8 @@ Note to self: This means that Windows 11 Home does not include Hyper-V, so somet
 
 Decision: 
 Leave Memory integrity on for now and test how the first VM runs. If it is too slow or will not start, turn Memory integrity off.
+
+Step 2: Getting Windows Server
+
+- Downloaded the Windows Server 2025 evaluation (180-day trial) from the Microsoft Evaluation Center.
+- File: 26100.32230.260111-0550.lt_release_svc_refresh_SERVER_EVAL_x64FRE_en-us.iso (about 7 GB).
