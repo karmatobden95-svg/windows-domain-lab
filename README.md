@@ -63,3 +63,8 @@ Leave Memory integrity on for now and test how the first VM runs. If it is too s
 - DFS Replication log: event 4602 at 3:24:29 PM, so SYSVOL was set up successfully.
 - Conclusion: domain healthy. Both dcdiag failures came from startup events and the lab having no internet, not a current fault.
 - Snapshot: 03-dc-promoted.
+  
+### Step 9: OU structure
+- Created KT-LAB > Head Office > Finance, IT, Sales, Service Desk, each with Users and Computers OUs.
+- Made Finance by hand in Active Directory Users and Computers, IT with single PowerShell commands, and Sales and Service Desk with a PowerShell loop.
+- Checked with `Get-ADOrganizationalUnit -Filter *`.
