@@ -68,3 +68,29 @@ Leave Memory integrity on for now and test how the first VM runs. If it is too s
 - Created KT-LAB > Head Office > Finance, IT, Sales, Service Desk, each with Users and Computers OUs.
 - Made Finance by hand in Active Directory Users and Computers, IT with single PowerShell commands, and Sales and Service Desk with a PowerShell loop.
 - Checked with `Get-ADOrganizationalUnit -Filter *`.
+
+### Step 10: First user accounts
+- Created five users by hand in Active Directory Users and Computers, one per department, with firstname.lastname logons and "must change password at next logon".
+- Fixed a missing last name on one account with Rename, which updates the full name, first/last name, display name and logon names together.
+- Checked with `Get-ADUser -SearchBase`.
+
+### Step 11: Bulk-created 20 users from CSV
+- Wrote users.csv (first name, last name, department) and created the accounts with Import-Csv and New-ADUser.
+- The temporary password is entered at run time with Read-Host, so no passwords are stored in the file or the script.
+- First attempt failed: the count command pasted onto the same line as the closing bracket, and PowerShell read it as part of the loop. Ran the two separately.
+- Second paste ran the script twice; Active Directory refused the duplicates with "account already exists". Final count: 25 users.
+
+- Grouping users by department showed 5 accounts with no department: the ones made by hand, since the New User window doesn't ask for it. Set them with Set-ADUser.
+
+### Step 12: Department security groups
+- Created a Groups OU and four global security groups (GG-Finance, GG-IT, GG-Sales, GG-ServiceDesk).
+- Filled each one by matching the Department field with Add-ADGroupMember. Checked GG-Finance: 7 members.
+
+- Created GG-AllStaff and nested the four department groups in it. Direct members: 4 groups. Recursive members: all 25 users.
+
+### Step 13: DHCP
+- Installed the DHCP Server role on DC01 and authorised it in Active Directory.
+- The install wizard looked stuck; `Get-WindowsFeature DHCP` showed it had already installed.
+- Scope LAB-SCOPE: 192.168.10.100 to 192.168.10.150, 8-day lease, DNS 192.168.10.10, domain kt-lab.local, no gateway.
+- Checked with Get-DhcpServerv4Scope, Get-DhcpServerInDC and Get-DhcpServerv4OptionValue.
+  
