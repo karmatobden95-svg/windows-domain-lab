@@ -58,7 +58,7 @@ Leave Memory integrity on for now and test how the first VM runs. If it is too s
 - Verified with `whoami` (kt-lab\administrator) and `Get-ADDomain`.
 - `dcdiag`: core tests passed. DFSREvent failed due to warnings logged during promotion; investigating.
   
-- ### Step 8: Checked the dcdiag failures in Event Viewer
+ ### Step 8: Checked the dcdiag failures in Event Viewer
 - System log: error 16642 at 3:24:27 PM, then 16648 ("account-identifier pool completed successfully") at 3:24:28 PM. The error fixed itself one second later.
 - DFS Replication log: event 4602 at 3:24:29 PM, so SYSVOL was set up successfully.
 - Conclusion: domain healthy. Both dcdiag failures came from startup events and the lab having no internet, not a current fault.
